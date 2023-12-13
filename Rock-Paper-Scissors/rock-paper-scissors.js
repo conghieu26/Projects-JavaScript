@@ -21,17 +21,37 @@ document.querySelector('.js-scissors-button')
 
 document.querySelector('.js-reset')
   .addEventListener('click', () => {
-      score.looses = 0;
-      score.wins = 0;
-      score.ties = 0;
-      localStorage.removeItem('score');
-      updateScore();
+    confirmResult();
   })
 
 document.querySelector('.js-auto-play-button')
   .addEventListener('click', () => {
     autoPlay();
   })
+
+  function confirmResult() {
+    document.querySelector('.js-show-confirm-result').innerHTML = 
+  `
+    Are you want to Result Score?
+    <button class="js-button-yes js-confirm-button" onclick="
+      score.looses = 0;
+      score.wins = 0;
+      score.ties = 0;
+      localStorage.removeItem('score');
+      updateScore();
+      hikeConfirmResult();
+    ">Yes</button>
+
+    <button class="js-button-no js-confirm-button" onclick="
+      hikeConfirmResult();
+    ">No</button>
+  `;
+  }
+  
+  function hikeConfirmResult() {
+    document.querySelector('.js-show-confirm-result').innerHTML = '';
+  }
+
 
   let isAutoPlaying = false;
   let intervalID;
